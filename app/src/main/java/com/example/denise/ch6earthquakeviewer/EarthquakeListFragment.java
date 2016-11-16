@@ -19,6 +19,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.TimeZone;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -90,7 +91,8 @@ public class EarthquakeListFragment extends ListFragment{
                 // Get a list of each earthquake entry.
                 NodeList nl = docEle.getElementsByTagName("entry");
                 if (nl != null && nl.getLength() > 0) {
-                    for (int i = 0 ; i < nl.getLength(); i++) {
+                    //for (int i = 0 ; i < nl.getLength(); i++) {
+                    for ( int i = 1; i < nl.getLength(); i++) {
                         Element entry = (Element)nl.item(i);
                         Element title = (Element)entry.getElementsByTagName("title").item(0);
                         Element g = (Element)entry.getElementsByTagName("georss:point").item(0);
@@ -101,9 +103,18 @@ public class EarthquakeListFragment extends ListFragment{
                         String hostname = "http://earthquake.usgs.gov";
                         String linkString = hostname + link.getAttribute("href");
 
+                        /*
                         String point = g.getFirstChild().getNodeValue();
                         String dt = when.getFirstChild().getNodeValue();
                         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss'Z'");
+                        */
+
+                        String point = g.getFirstChild().getNodeValue();
+                        String dt = (when.getFirstChild().getNodeValue()).replaceFirst("Z", "+0000");
+                        String format = "yyyy-MM-dd'T'HH:mm:ss.SSSZ";
+                        SimpleDateFormat sdf = new SimpleDateFormat(format);
+                        sdf.setTimeZone(TimeZone.getDefault());
+
                         Date qdate = new GregorianCalendar(0,0,0).getTime();
                         try {
                             qdate = sdf.parse(dt);

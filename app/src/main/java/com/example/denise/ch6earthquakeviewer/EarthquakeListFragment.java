@@ -92,7 +92,7 @@ public class EarthquakeListFragment extends ListFragment{
                 NodeList nl = docEle.getElementsByTagName("entry");
                 if (nl != null && nl.getLength() > 0) {
                     //for (int i = 0 ; i < nl.getLength(); i++) {
-                    for ( int i = 1; i < nl.getLength(); i++) {
+                    for ( int i = 0; i < nl.getLength(); i++) {
                         Element entry = (Element)nl.item(i);
                         Element title = (Element)entry.getElementsByTagName("title").item(0);
                         Element g = (Element)entry.getElementsByTagName("georss:point").item(0);
@@ -110,7 +110,7 @@ public class EarthquakeListFragment extends ListFragment{
                         */
 
                         String point = g.getFirstChild().getNodeValue();
-                        String dt = (when.getFirstChild().getNodeValue()).replaceFirst("Z", "+0000");
+                        String dt = when.getFirstChild().getNodeValue().replaceFirst("Z", "+0000");
                         String format = "yyyy-MM-dd'T'HH:mm:ss.SSSZ";
                         SimpleDateFormat sdf = new SimpleDateFormat(format);
                         sdf.setTimeZone(TimeZone.getDefault());
@@ -128,7 +128,7 @@ public class EarthquakeListFragment extends ListFragment{
                         l.setLongitude(Double.parseDouble(location[1]));
 
                         String magnitudeString = details.split(" ")[1];
-                        int end =  magnitudeString.length()-1;
+                        int end =  magnitudeString.length();
                         double magnitude = Double.parseDouble(magnitudeString.substring(0, end));
 
                         details = details.split(",")[1].trim();

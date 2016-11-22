@@ -12,7 +12,6 @@ import java.text.SimpleDateFormat;
 import android.location.Location;
 
 public class Quake {
-
     private Date date;
     private String details;
     private Location location;

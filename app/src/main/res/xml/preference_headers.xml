@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <header android:fragment="com.example.denise.ch6earthquakeviewer.UserPreferenceFragment"
+        android:title="Settings"
+        android:summary="Earthquake Refresh Settings" />
+</PreferenceScreen>
